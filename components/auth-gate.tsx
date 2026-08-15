@@ -1,14 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2, LoaderCircle, WalletCards } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 import { useFinance } from "./finance-store";
+import { Swirling } from "./ui/swirling";
 
 export function AuthGate({ children }: { children: React.ReactNode }) {
   const { user, loading } = useFinance();
+  const previousUserId = useRef<string | null>(null);
+  const [entering, setEntering] = useState(false);
+  useEffect(() => {
+    if (!user) { previousUserId.current = null; setEntering(false); return; }
+    if (previousUserId.current === user.id) return;
+    previousUserId.current = user.id;
+    setEntering(true);
+    const timeout = window.setTimeout(() => setEntering(false), 900);
+    return () => window.clearTimeout(timeout);
+  }, [user]);
   if (loading) return <main className="grid min-h-dvh place-items-center bg-canvas"><LoaderCircle className="animate-spin text-green" aria-label="Loading Bao" /></main>;
   if (!user) return <AuthScreen />;
+  if (entering) return <main className="auth-marble grid min-h-dvh place-items-center px-5" aria-live="polite"><div className="flex flex-col items-center text-white"><Swirling className="size-16 text-white" /><p className="font-display mt-6 text-lg font-medium tracking-tight">Opening Bao</p><p className="mt-1 text-sm text-soft-sage">Getting your money space ready</p></div></main>;
   return <>{children}</>;
 }
 
