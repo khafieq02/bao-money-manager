@@ -1,0 +1,6 @@
+"use client";
+import { Bell, LogOut } from "lucide-react";
+import { DesktopSidebar, MobileBottomNav } from "./navigation";
+import { IconButton } from "./ui";
+import { useFinance } from "./finance-store";
+export function PageShell({ children, title, subtitle }: { children: React.ReactNode; title?: string; subtitle?: string }) { const { signOut } = useFinance(); return <div className="app-shell flex"><DesktopSidebar/><main className="min-w-0 flex-1"><div className="mx-auto max-w-6xl px-4 pb-28 pt-[max(20px,env(safe-area-inset-top))] sm:px-7 md:pb-10 md:pt-8"><header className="mb-5 flex items-center justify-between"><div>{title ? <><p className="text-xs font-semibold tracking-[.15em] text-green">BAO</p><h1 className="font-display mt-1 text-2xl font-semibold text-ink">{title}</h1>{subtitle && <p className="mt-1 text-sm text-muted">{subtitle}</p>}</> : <><p className="font-display text-xl font-semibold tracking-tight text-forest">bao</p><h1 className="font-display mt-1 text-xl font-medium text-ink">Good evening <span aria-hidden>👋</span></h1></>}</div><div className="flex gap-2">{!title && <IconButton aria-label="Notifications"><Bell size={19}/></IconButton>}<IconButton aria-label="Sign out" onClick={() => signOut()}><LogOut size={18}/></IconButton></div></header>{children}</div></main><MobileBottomNav/></div>; }
