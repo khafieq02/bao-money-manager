@@ -13,6 +13,17 @@ a { color: inherit; text-decoration: none; }
 .font-display { font-family: Poppins, Inter, sans-serif; }
 .font-finance { font-family: 'IBM Plex Mono', monospace; letter-spacing: -0.045em; }
 .app-shell { min-height: 100dvh; }
+.app-shell { background: #09090A; color: #F3F3F4; }
+.app-shell .bg-white { background-color: #1B1B1E !important; }
+.app-shell .bg-canvas { background-color: #252528 !important; }
+.app-shell .bg-forest { background-color: #171719 !important; }
+.app-shell .bg-soft-sage { background-color: #29292D !important; }
+.app-shell .text-ink, .app-shell .text-forest { color: #F3F3F4 !important; }
+.app-shell .text-muted { color: #A0A0A7 !important; }
+.app-shell .text-green { color: #B8BEF2 !important; }
+.app-shell .text-sage { color: #C4C9FF !important; }
+.app-shell .border-line { border-color: #303034 !important; }
+.app-shell .divide-line > :not([hidden]) ~ :not([hidden]) { border-color: #303034 !important; }
 .auth-marble {
   background-color: #070808;
   background-image:
